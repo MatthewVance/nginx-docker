@@ -4,13 +4,13 @@ MAINTAINER Matthew Vance
 # Set versions of each component to build from source
 ENV VERSION_PCRE pcre-8.39
 ENV VERSION_ZLIB zlib-1.2.8
-ENV VERSION_OPENSSL openssl-1.0.2h
+ENV VERSION_OPENSSL openssl-1.1.0
 ENV VERSION_NGINX nginx-1.11.4
 
 # Set expected checksums versions
 ENV SHA256_PCRE=ccdf7e788769838f8285b3ee672ed573358202305ee361cfec7a4a4fb005bbc7
 ENV SHA256_ZLIB=36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d
-ENV SHA256_OPENSSL=1d4007e53aad94a5b2002fe045ee7bb0b3d98f1a47f8b2bc851dcd1c74332919
+ENV SHA256_OPENSSL=f5c69ff9ac1472c80b868efc1c1c0d8dcfc746d29ebe563de2365dd56dbd8c82
 ENV SHA256_NGINX=06221c1f43f643bc6bfe5b2c26d19e09f2588d5cde6c65bdb77dfcce7c026b3b
 
 # Set GPG keys used to sign downloads
@@ -64,7 +64,7 @@ RUN \
     --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro' \
     --with-pcre=$BPATH/$VERSION_PCRE \
     --with-zlib=$BPATH/$VERSION_ZLIB \
-    --with-openssl-opt="no-weak-ssl-ciphers no-ssl2 no-ssl3 no-krb5 no-shared enable-ec_nistp_64_gcc_128 -DOPENSSL_NO_HEARTBEATS -fstack-protector-strong" \
+    --with-openssl-opt="no-weak-ssl-ciphers no-ssl3 no-shared enable-ec_nistp_64_gcc_128 -DOPENSSL_NO_HEARTBEATS -fstack-protector-strong" \
     --with-openssl=$BPATH/$VERSION_OPENSSL \
     --modules-path=/usr/lib/nginx/modules \
     --conf-path=/etc/nginx/nginx.conf \
