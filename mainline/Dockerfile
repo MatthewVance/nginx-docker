@@ -21,7 +21,7 @@ ENV GPG_NGINX=B0F4253373F8F6F510D42178520A9993A1C052F8
 ENV SOURCE_PCRE=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
 ENV SOURCE_ZLIB=http://zlib.net/
 ENV SOURCE_OPENSSL=https://www.openssl.org/source/
-ENV SOURCE_NGINX=http://nginx.org/download/
+ENV SOURCE_NGINX=https://nginx.org/download/
 
 # Set where OpenSSL and NGINX will be built
 ENV BPATH /usr/local/src/nginx
