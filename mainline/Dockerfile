@@ -26,8 +26,11 @@ ENV SOURCE_NGINX=https://nginx.org/download/
 # Set where OpenSSL and NGINX will be built
 ENV BPATH /usr/local/src/nginx
 
+# Set variable so ngx_brotli static module can be compiled into nginx by itself
+ENV NGX_BROTLI_STATIC_MODULE_ONLY=1
+
 RUN \
-    BUILD_DEPS='build-essential ca-certificates curl libssl-dev' && \
+    BUILD_DEPS='build-essential ca-certificates curl git libssl-dev' && \
     set -x && \
     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends \
       $BUILD_DEPS && \
@@ -47,6 +50,7 @@ RUN \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_OPENSSL" && \
     gpg --batch --verify openssl.tar.gz.asc openssl.tar.gz && \
     tar xzf openssl.tar.gz && \
+    git clone https://github.com/google/ngx_brotli --depth=1 && \
     addgroup --system nginx && \
     adduser --disabled-password --system --home /var/cache/nginx --shell /sbin/nologin --group nginx && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz -o nginx.tar.gz && \
@@ -102,7 +106,8 @@ RUN \
     --without-http_ssi_module \
     --without-mail_imap_module \
     --without-mail_pop3_module \
-    --without-mail_smtp_module && \
+    --without-mail_smtp_module \
+    --add-module=$BPATH/ngx_brotli && \
     make && \
     make install && \
     rm -rf /etc/nginx/html/ && \
