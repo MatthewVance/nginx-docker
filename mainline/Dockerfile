@@ -5,13 +5,13 @@ MAINTAINER Matthew Vance
 ENV VERSION_PCRE pcre-8.39
 ENV VERSION_ZLIB zlib-1.2.8
 ENV VERSION_OPENSSL openssl-1.1.0c
-ENV VERSION_NGINX nginx-1.11.5
+ENV VERSION_NGINX nginx-1.11.6
 
 # Set expected checksums versions
 ENV SHA256_PCRE=ccdf7e788769838f8285b3ee672ed573358202305ee361cfec7a4a4fb005bbc7
 ENV SHA256_ZLIB=36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d
 ENV SHA256_OPENSSL=fc436441a2e05752d31b4e46115eb89709a28aef96d4fe786abe92409b2fd6f5
-ENV SHA256_NGINX=223f8a2345a75f891098cf26ccdf208b293350388f51ce69083674c9432db6f6
+ENV SHA256_NGINX=3153abbb518e2d9c032e1b127da3dc0028ad36cd4679e5f3be0b8afa33bc85bd
 
 # Set GPG keys used to sign downloads
 ENV GPG_OPENSSL=8657ABB260F056B1E5190839D9C4D26D0E604491
@@ -52,6 +52,9 @@ RUN \
     gpg --batch --verify openssl.tar.gz.asc openssl.tar.gz && \
     tar xzf openssl.tar.gz && \
     git clone https://github.com/google/ngx_brotli --depth=1 && \
+    cd ngx_brotli && \
+    git submodule update --init && \
+    cd .. && \
     addgroup --system nginx && \
     adduser --disabled-password --system --home /var/cache/nginx --shell /sbin/nologin --group nginx && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz -o nginx.tar.gz && \
@@ -67,7 +70,7 @@ RUN \
     ./configure \
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
-    --with-cc-opt='-O3 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
+    --with-cc-opt='-O3 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wno-deprecated-declarations' \
     --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro' \
     --with-pcre=$BPATH/$VERSION_PCRE \
     --with-zlib=$BPATH/$VERSION_ZLIB \
