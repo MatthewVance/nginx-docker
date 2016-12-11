@@ -70,7 +70,7 @@ RUN \
     ./configure \
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
-    --with-cc-opt='-O3 -fPIE -fstack-protector-strong -Wformat -Werror=format-security -Wno-deprecated-declarations' \
+    --with-cc-opt='-O3 -fPIE -fstack-protector-strong -Wformat -Werror=format-security' \
     --with-ld-opt='-Wl,-Bsymbolic-functions -Wl,-z,relro' \
     --with-pcre=$BPATH/$VERSION_PCRE \
     --with-zlib=$BPATH/$VERSION_ZLIB \
