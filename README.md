@@ -2,7 +2,7 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.11.6`, `mainline`, `1`,  `1.11`, `latest` (*mainline/Dockerfile*)](https://github.com/MatthewVance/nginx-docker/tree/master/mainline)
+- [`1.11.13`, `mainline`, `1`,  `1.11`, `latest` (*mainline/Dockerfile*)](https://github.com/MatthewVance/nginx-docker/tree/master/mainline)
 
 ## What is nginx?
 
