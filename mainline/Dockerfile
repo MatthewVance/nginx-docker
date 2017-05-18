@@ -101,7 +101,6 @@ RUN \
     --with-http_stub_status_module \
     --with-http_sub_module \
     --with-http_v2_module \
-    --with-ipv6 \
     --with-pcre-jit \
     --with-stream \
     --with-stream_ssl_module \
