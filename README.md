@@ -22,12 +22,6 @@ docker run --name my-nginx -d -p 80:80 \
 
 Read the official nginx Docker image documentation for more ideas.
 
-# Supported Docker versions
-
-This image has been tested on Docker version 1.12.3.
-
-Use on other versions at your own risk.
-
 # User feedback
 
 ## Documentation
