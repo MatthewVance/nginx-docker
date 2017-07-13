@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Matthew Vance
 
 # Set versions of each component to build from source
@@ -31,7 +31,7 @@ ENV BPATH /usr/local/src/nginx
 ENV NGX_BROTLI_STATIC_MODULE_ONLY=1
 
 RUN \
-    BUILD_DEPS='build-essential ca-certificates curl git libssl-dev' && \
+    BUILD_DEPS='build-essential ca-certificates curl dirmngr git gnupg libssl-dev' && \
     set -x && \
     DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends \
       $BUILD_DEPS && \
@@ -46,7 +46,7 @@ RUN \
     tar xzf zlib.tar.gz && \
     curl -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz -o openssl.tar.gz && \
     echo "${SHA256_OPENSSL} $BPATH/openssl.tar.gz" | sha256sum -c - && \
-    curl -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz.asc -o openssl.tar.gz.asc && \
+    curl --ipv4 -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz.asc -o openssl.tar.gz.asc && \
     export GNUPGHOME="$(mktemp -d)" && \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_OPENSSL" && \
     gpg --batch --verify openssl.tar.gz.asc openssl.tar.gz && \
