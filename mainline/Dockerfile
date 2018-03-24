@@ -4,13 +4,13 @@ MAINTAINER Matthew Vance
 # Set versions of each component to build from source
 ENV VERSION_PCRE pcre-8.42
 ENV VERSION_ZLIB zlib-1.2.11
-ENV VERSION_OPENSSL openssl-1.1.0f
+ENV VERSION_OPENSSL openssl-1.1.0g
 ENV VERSION_NGINX nginx-1.13.3
 
 # Set expected checksums versions
 ENV SHA256_PCRE=69acbc2fbdefb955d42a4c606dfde800c2885711d2979e356c0636efde9ec3b5
 ENV SHA256_ZLIB=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
-ENV SHA256_OPENSSL=12f746f3f2493b2f39da7ecf63d7ee19c6ac9ec6a4fcd8c229da8a522cb12765
+ENV SHA256_OPENSSL=de4d501267da39310905cb6dc8c6121f7a2cad45a7707f76df828fe1b85073af
 ENV SHA256_NGINX=5b73f98004c302fb8e4a172abf046d9ce77739a82487e4873b39f9b0dcbb0d72
 
 # Set GPG keys used to sign downloads
