@@ -19,7 +19,7 @@ ENV GPG_NGINX=B0F4253373F8F6F510D42178520A9993A1C052F8
 
 # Set URLs to the source directories
 ENV SOURCE_DYNAMIC_TLS_RECORDS=https://raw.githubusercontent.com/cloudflare/sslconfig/master/patches/nginx__1.11.5_dynamic_tls_records.patch
-ENV SOURCE_PCRE=ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
+ENV SOURCE_PCRE=https://ftp.pcre.org/pub/pcre/
 ENV SOURCE_ZLIB=http://zlib.net/
 ENV SOURCE_OPENSSL=https://www.openssl.org/source/
 ENV SOURCE_NGINX=https://nginx.org/download/
