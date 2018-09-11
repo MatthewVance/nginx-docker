@@ -14,8 +14,10 @@ ENV SHA256_OPENSSL=2836875a0f89c03d0fdf483941512613a50cfb421d6fd94b9f41d7279d586
 ENV SHA256_NGINX=9391fb91c3e2ebd040a4e3ac2b2f0893deb6232edc30a8e16fcc9c3fa9d6be85
 
 # Set GPG keys used to sign downloads
-ENV GPG_OPENSSL=8657ABB260F056B1E5190839D9C4D26D0E604491
-ENV GPG_NGINX=B0F4253373F8F6F510D42178520A9993A1C052F8
+ENV OPGP_PCRE=45F68D54BBE23FB3039B46E59766E084FB0F43D8
+ENV OPGP_ZLIB=5ED46A6721D365587791E2AA783FCD8E58BCAFBA
+ENV OGPG_OPENSSL=8657ABB260F056B1E5190839D9C4D26D0E604491
+ENV OGPG_NGINX=B0F4253373F8F6F510D42178520A9993A1C052F8
 
 # Set URLs to the source directories
 ENV SOURCE_DYNAMIC_TLS_RECORDS=https://raw.githubusercontent.com/cloudflare/sslconfig/master/patches/nginx__1.11.5_dynamic_tls_records.patch
@@ -48,8 +50,8 @@ RUN \
     echo "${SHA256_OPENSSL} $BPATH/openssl.tar.gz" | sha256sum -c - && \
     curl --ipv4 -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz.asc -o openssl.tar.gz.asc && \
     export GNUPGHOME="$(mktemp -d)" && \
-    ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$opgp_pcre" "$opgp_zlib" "$opgp_openssl" "$opgp_nginx" \
-    || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$opgp_pcre" "$opgp_zlib" "$opgp_openssl" "$opgp_nginx") && \
+    ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB" \
+    || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB") && \
     gpg --batch --verify openssl.tar.gz.asc openssl.tar.gz && \
     tar xzf openssl.tar.gz && \
     git clone https://github.com/google/ngx_brotli --depth=1 && \
@@ -61,9 +63,8 @@ RUN \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz -o nginx.tar.gz && \
     echo "${SHA256_NGINX} $BPATH/nginx.tar.gz" | sha256sum -c - && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz.asc -o nginx.tar.gz.asc && \
-    export GNUPGHOME="$(mktemp -d)" && \
-    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_NGINX" && \
-    gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz && \
+    ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX"  \
+    || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX") && \
     tar xzf nginx.tar.gz && \
     cd $BPATH/$VERSION_NGINX && \
     curl -fSL $SOURCE_DYNAMIC_TLS_RECORDS -o nginx__dynamic_tls_records.patch && \
