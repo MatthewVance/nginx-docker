@@ -65,6 +65,7 @@ RUN \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz.asc -o nginx.tar.gz.asc && \
     ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX"  \
     || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX") && \
+    gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz && \
     tar xzf nginx.tar.gz && \
     cd $BPATH/$VERSION_NGINX && \
     curl -fSL $SOURCE_DYNAMIC_TLS_RECORDS -o nginx__dynamic_tls_records.patch && \
