@@ -20,7 +20,6 @@ ENV OGPG_OPENSSL=8657ABB260F056B1E5190839D9C4D26D0E604491
 ENV OGPG_NGINX=B0F4253373F8F6F510D42178520A9993A1C052F8
 
 # Set URLs to the source directories
-ENV SOURCE_DYNAMIC_TLS_RECORDS=https://raw.githubusercontent.com/cloudflare/sslconfig/master/patches/nginx__1.11.5_dynamic_tls_records.patch
 ENV SOURCE_PCRE=https://ftp.pcre.org/pub/pcre/
 ENV SOURCE_ZLIB=https://zlib.net/
 ENV SOURCE_OPENSSL=https://www.openssl.org/source/
@@ -68,8 +67,6 @@ RUN \
     gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz && \
     tar xzf nginx.tar.gz && \
     cd $BPATH/$VERSION_NGINX && \
-    curl -fSL $SOURCE_DYNAMIC_TLS_RECORDS -o nginx__dynamic_tls_records.patch && \
-    patch -p1 < nginx__dynamic_tls_records.patch && \
     ./configure \
     --prefix=/etc/nginx \
     --sbin-path=/usr/sbin/nginx \
