@@ -50,8 +50,8 @@ RUN \
     echo "${SHA256_OPENSSL} $BPATH/openssl.tar.gz" | sha256sum -c - && \
     curl --ipv4 -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz.asc -o openssl.tar.gz.asc && \
     export GNUPGHOME="$(mktemp -d)" && \
-    ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB" \
-    || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB") && \
+    ( gpg --no-tty --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB" \
+    || gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB") && \
     gpg --batch --verify openssl.tar.gz.asc openssl.tar.gz && \
     tar xzf openssl.tar.gz && \
     git clone https://github.com/google/ngx_brotli --depth=1 && \
@@ -63,8 +63,8 @@ RUN \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz -o nginx.tar.gz && \
     echo "${SHA256_NGINX} $BPATH/nginx.tar.gz" | sha256sum -c - && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz.asc -o nginx.tar.gz.asc && \
-    ( gpg --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX"  \
-    || gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX") && \
+    ( gpg --no-tty --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX"  \
+    || gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX") && \
     gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz && \
     tar xzf nginx.tar.gz && \
     cd $BPATH/$VERSION_NGINX && \
