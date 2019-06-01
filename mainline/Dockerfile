@@ -7,12 +7,6 @@ ENV VERSION_ZLIB zlib-1.2.11
 ENV VERSION_OPENSSL openssl-1.1.1c
 ENV VERSION_NGINX nginx-1.17.0
 
-# Set expected checksums versions
-ENV SHA256_PCRE=45F68D54BBE23FB3039B46E59766E084FB0F43D8
-ENV SHA256_ZLIB=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
-ENV SHA256_OPENSSL=f6fb3079ad15076154eda9413fed42877d668e7069d9b87396d0804fdb3f4c90
-ENV SHA256_NGINX=e21b5d06cd53e86afb94f0b3678e0abb0c0f011433471fa3d895cefa65ae0fab
-
 # Set GPG keys used to sign downloads
 ENV OPGP_PCRE=45F68D54BBE23FB3039B46E59766E084FB0F43D8
 ENV OPGP_ZLIB=5ED46A6721D365587791E2AA783FCD8E58BCAFBA
@@ -40,13 +34,10 @@ RUN \
     mkdir $BPATH && \
     cd $BPATH && \
     curl -fSL $SOURCE_PCRE$VERSION_PCRE.tar.gz -o pcre.tar.gz && \
-    echo "${SHA256_PCRE} $BPATH/pcre.tar.gz" | sha256sum -c - && \
     tar xzf pcre.tar.gz && \
     curl -fSL $SOURCE_ZLIB$VERSION_ZLIB.tar.gz -o zlib.tar.gz && \
-    echo "${SHA256_ZLIB} $BPATH/zlib.tar.gz" | sha256sum -c - && \
     tar xzf zlib.tar.gz && \
     curl -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz -o openssl.tar.gz && \
-    echo "${SHA256_OPENSSL} $BPATH/openssl.tar.gz" | sha256sum -c - && \
     curl --ipv4 -fSL $SOURCE_OPENSSL$VERSION_OPENSSL.tar.gz.asc -o openssl.tar.gz.asc && \
     export GNUPGHOME="$(mktemp -d)" && \
     ( gpg --no-tty --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_OPENSSL" "$OPGP_PCRE" "$OPGP_ZLIB" \
@@ -60,7 +51,6 @@ RUN \
     addgroup --system nginx && \
     adduser --disabled-password --system --home /var/cache/nginx --shell /sbin/nologin --group nginx && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz -o nginx.tar.gz && \
-    echo "${SHA256_NGINX} $BPATH/nginx.tar.gz" | sha256sum -c - && \
     curl -fSL $SOURCE_NGINX$VERSION_NGINX.tar.gz.asc -o nginx.tar.gz.asc && \
     ( gpg --no-tty --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX"  \
     || gpg --no-tty --keyserver ha.pool.sks-keyservers.net --recv-keys "$OGPG_NGINX") && \
