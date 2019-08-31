@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 MAINTAINER Matthew Vance
 
 # Set versions of each component to build from source
