@@ -2,7 +2,7 @@ FROM debian:buster
 MAINTAINER Matthew Vance
 
 # Set versions of each component to build from source
-ENV VERSION_PCRE pcre-8.43
+ENV VERSION_PCRE pcre-8.44
 ENV VERSION_ZLIB zlib-1.2.11
 ENV VERSION_OPENSSL openssl-1.1.1c
 ENV VERSION_NGINX nginx-1.17.3
