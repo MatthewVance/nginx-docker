@@ -2,7 +2,7 @@
 
 ## Supported tags and respective `Dockerfile` links
 
-- [`1.17.3`, `mainline`, `1`,  `1.17`, `latest` (*mainline/Dockerfile*)](https://github.com/MatthewVance/nginx-docker/tree/master/mainline)
+- [`1.17.10`, `mainline`, `1`,  `1.17`, `latest` (*mainline/Dockerfile*)](https://github.com/MatthewVance/nginx-docker/tree/master/mainline)
 
 ## What is nginx?
 
@@ -19,7 +19,7 @@ Run this container with the following command:
 docker run --name my-nginx -d -p 80:80 \
 --restart=always mvance/nginx:latest
 ```
-
+docker run --name my-nginx -d -p 80:80 mvance/nginx:latest
 Read the official nginx Docker image documentation for more ideas.
 
 # User feedback
