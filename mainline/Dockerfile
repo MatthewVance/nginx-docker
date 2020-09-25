@@ -4,7 +4,7 @@ MAINTAINER Matthew Vance
 # Set versions of each component to build from source
 ENV VERSION_PCRE pcre-8.44
 ENV VERSION_ZLIB zlib-1.2.11
-ENV VERSION_OPENSSL openssl-1.1.1g
+ENV VERSION_OPENSSL openssl-1.1.1h
 ENV VERSION_NGINX nginx-1.17.10
 
 # Set GPG keys used to sign downloads
